@@ -1,19 +1,45 @@
 #!/bin/bash
-# Bash Menu Script Example
 
+# Bash Main Script for apache ITI shell project
+# author Ahmed M. Saleh
+
+
+# enable root access only
 if [ "$EUID" -ne 0 ]
-  then echo "Please run as root"
+  then echo "Access Denied, Please run as root"
   exit
 fi
 
-PS3='What do you want to do with the virtual hosts: '
-options=("install apache2 for the first time" "reinstall apache2" 
-"uninstall apache2 with the configuration files" "uninstall apache2 only"
-"list" "add" "delete" "disable site" "enable site"
-"enable authentication" "disable authentication" "Quit")
+# opening
+echo ""
+echo "================================================================================="
+echo "=============================== Apache2 Control ================================="
+echo "================================================================================="
+echo ""
+
+# ask user to get input
+PS3='What do you want to do: '
+
+# generate menu using option
+options=(
+	"install apache2"
+	"reinstall apache2"
+	"uninstall apache2 and remove conf files"
+	"uninstall apache2 only"
+	"show apache2 status"
+	"list all Vhosts"
+	"add"
+	"delete"
+	"disable site"
+	"enable site"
+	"enable authentication"
+	"disable authentication"
+	"quit"
+)
+
 select opt in "${options[@]}"; do
 	case $opt in
-	"install apache2 for the first time")
+	"install apache2")
 		echo "installing ..."
 		bash install.sh
 		;;
@@ -25,13 +51,17 @@ select opt in "${options[@]}"; do
 		echo "uninstalling ..."
 		bash uninstall.sh
 		;;
-	"uninstall apache2 with the configuration files")
+	"uninstall apache2 and remove conf files")
 		echo "uninstalling ..."
 		bash uninstall_purge.sh
 		;;
-	"list")
+	"show apache2 status")
+		echo "status ..."
+		bash status.sh
+		;;
+	"list all Vhosts")
 		echo "List of all Vhosts"
-		bash list.sh
+		bash Vhost-list.sh
 		;;
 	"add")
 		echo "will try to add new host"
@@ -57,9 +87,12 @@ select opt in "${options[@]}"; do
 		echo "disabling authentication of a virtual host"
 		bash disableAuth.sh
 		;;
-	"Quit")
-		break
+	"quit")
+		echo "bye"
+		exit
 		;;
-	*) echo "invalid option $REPLY" ;;
+	*)
+		echo "invalid option $REPLY"
+		;;
 	esac
 done
