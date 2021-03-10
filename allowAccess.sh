@@ -15,13 +15,12 @@ sudo apt-get install apache2-utils
 touch $name/.htpasswd
 read -p "Please set the user name : " username
 htpasswd $name/.htpasswd $username
+#require password from user
 
-cp default-vhostwithAuth.conf /etc/apache2/sites-available/
-cd /etc/apache2/sites-available/
-cp default-vhostwithAuth.conf $sitename.conf
-sed -i "s/example.local/$sitename/g" $sitename.conf
-sed -i "s/127.0.0.x/$host/g" $sitename.conf
-sed -i "s|example.dir|$name|g" $sitename.conf
+cp default-vhostwithAuth.conf /etc/apache2/sites-available/${sitename}withAuth.conf
+sed -i "s/example.local/$sitename/g" /etc/apache2/sites-available/${sitename}withAuth.conf
+sed -i "s/127.0.0.x/$host/g" /etc/apache2/sites-available/${sitename}withAuth.conf
+sed -i "s|example.dir|$name|g" /etc/apache2/sites-available/${sitename}withAuth.conf
 
 cp default-htaccess $name/.htaccess
 cd $name
