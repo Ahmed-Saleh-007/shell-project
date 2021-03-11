@@ -24,14 +24,14 @@ PS3='What do you want to do: '
 options=(
 	"install apache2"
 	"reinstall apache2"
-	"uninstall apache2 and remove conf files"
 	"uninstall apache2 only"
+	"uninstall apache2 and remove conf files"
 	"show apache2 status"
 	"list all Vhosts"
-	"add"
-	"delete"
-	"disable site"
+	"add Vhost"
+	"delete Vhost"
 	"enable site"
+	"disable site"
 	"enable authentication"
 	"disable authentication"
 	"quit"
@@ -53,7 +53,7 @@ select opt in "${options[@]}"; do
 		;;
 	"uninstall apache2 and remove conf files")
 		echo "uninstalling ..."
-		bash uninstall_purge.sh
+		bash uninstall-purge.sh
 		;;
 	"show apache2 status")
 		echo "status ..."
@@ -63,21 +63,21 @@ select opt in "${options[@]}"; do
 		echo "List of all Vhosts"
 		bash Vhost-list.sh
 		;;
-	"add")
-		echo "will try to add new host"
-		bash add.sh
+	"add Vhost")
+		echo "add new Vhost"
+		bash Vhost-add.sh
 		;;
-	"delete")
-		echo "deleting virtual host ..."
-		bash delete.sh
-		;;
-	"disable site")
-		echo "disabling site of a virtual host"
-		bash disableSite.sh
+	"delete Vhost")
+		echo "deleting Vhost ..."
+		bash Vhost-delete.sh
 		;;
 	"enable site")
 		echo "enabling site of a virtual host"
 		bash enableSite.sh
+		;;
+	"disable site")
+		echo "disabling site of a virtual host"
+		bash disableSite.sh
 		;;
 	"enable authentication")
 		echo "enabling authentication of a virtual host"
