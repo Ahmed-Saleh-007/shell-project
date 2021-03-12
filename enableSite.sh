@@ -11,4 +11,4 @@ a2ensite $sitename.conf
 # reload apache2
 service apache2 reload
 
-echo "All done, site enabled apache reloaded"
+echo "All done, site enabled, apache reloaded"

@@ -1,10 +1,9 @@
 #!/bin/bash
 
 # Bash Main Script for apache ITI shell project
-# author Ahmed M. Saleh
 
 
-# enable root access only
+# root access only restriction
 if [ "$EUID" -ne 0 ]
   then echo "Access Denied, Please run as root"
   exit
@@ -72,19 +71,19 @@ select opt in "${options[@]}"; do
 		bash Vhost-delete.sh
 		;;
 	"enable site")
-		echo "enabling site of a virtual host"
+		echo "enabling site for Vhost"
 		bash enableSite.sh
 		;;
 	"disable site")
-		echo "disabling site of a virtual host"
+		echo "disabling site for Vhost"
 		bash disableSite.sh
 		;;
 	"enable authentication")
-		echo "enabling authentication of a virtual host"
-		bash allowAccess.sh
+		echo "enabling auth for Vhost"
+		bash enableAuth.sh
 		;;
 	"disable authentication")
-		echo "disabling authentication of a virtual host"
+		echo "disabling auth for Vhost"
 		bash disableAuth.sh
 		;;
 	"quit")
