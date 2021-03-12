@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Bash Main Script for apache ITI shell project
-
+# Author: Ahmed M. Saleh
 
 # root access only restriction
 if [ "$EUID" -ne 0 ]
